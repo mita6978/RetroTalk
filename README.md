@@ -1,4 +1,4 @@
-# RetroTvChat
+# RetroTelephoneTV
 
 ### Team Members:
 Jessica Knoblock, Michael Taylor, Timothy Papich
