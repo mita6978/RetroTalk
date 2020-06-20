@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap";
+@font-face {
+  font-family: "Retro Nouveau";
+  src: url("/assets/fonts/Retro-Nouveau-JNL-W05-Regular.woff2") format("woff2"),
+       url("/assets/fonts/Retro-Nouveau-JNL-W05-Regular.woff") format("woff");
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Retro Nouveau";
+}
+
+$fa-font-path:  "@fortawesome/fontawesome-free/webfonts";
+@import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "@fortawesome/fontawesome-free/scss/solid.scss";
+@import "@fortawesome/fontawesome-free/scss/brands.scss";
