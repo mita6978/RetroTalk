@@ -17,12 +17,9 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
-    children: [
-      { path: 'chat', component: ChatComponent },
-      { path: 'about', component: AboutComponent },
-      { path: 'account', component: AccountComponent }
-    ]
-  }
+  },
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({

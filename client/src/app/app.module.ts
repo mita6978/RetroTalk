@@ -3,16 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChatComponent } from './chat/chat.component';
-import { AboutComponent } from './about/about.component';
-import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChatComponent,
-    AboutComponent,
-    AccountComponent
   ],
   imports: [
     BrowserModule,
