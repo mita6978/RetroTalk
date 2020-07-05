@@ -11,6 +11,7 @@ module.exports.register = (req, res) => {
   user.setPassword(req.body.password);
 
   user.save(() => {
+    console.log("user created");
     const token = user.generateJwt();
     res.status(200);
     res.json({

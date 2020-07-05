@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
   email: { type: String, unique: true, required: true },
   name: { type: String, required: true },
-  active: { type: Boolean, required: true, default: false},
-  contacts: { type: Array, required: true },
+  activeCall: { type: Boolean, required: true, default: false},
+  contacts: { type: Array },
   hash: String, salt: String
 });
 
@@ -43,8 +43,8 @@ userSchema.methods.generateJwt = function() {
       name: this.name,
       exp: parseInt(expiry.getTime() / 1000)
     },
-    'MY_SECRET'
-  ); // DO NOT KEEP YOUR SECRET IN THE CODE!
+    'TEAM_X'
+  );
 };
 
 mongoose.model('User', userSchema);
