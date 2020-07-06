@@ -1,9 +1,9 @@
 require('./users');
 const mongoose = require('mongoose');
-const dbURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/meanAuth';
+const dbURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/RetroTalk';
 
 mongoose.set('useCreateIndex', true);
-mongoose.connect(dbURI, {
+mongoose.connect('mongodb://localhost:27017/RetroTalk', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
