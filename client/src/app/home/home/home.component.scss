@@ -1,0 +1,28 @@
+/* Start Retro Menu */
+.retro-menu {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  width: 736px;
+  display: inline-block;
+  background-image: url('../../../assets/menu/menu-bar-bg.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.retro-menu img {
+  border-radius: 50%;
+  border-width: 3px;
+  margin-left: 50px;
+  margin-right: 25px;
+  border-style: solid;
+  border-color: rgb(40, 35, 16);
+  transition: transform 1s;
+}
+
+.retro-menu img:hover {
+  border-color: #ff3603;
+  transform: scale(1.2);
+}
+
+/* End Retro Menu */
