@@ -7,6 +7,8 @@ import { AboutComponent } from './../about/about.component';
 import { ChatComponent } from './../chat/chat.component';
 import { HomeComponent } from './home/home.component';
 
+import { MakeCallComponent } from '../chat/make-call/make-call.component';
+
 
 const homeRoute: Routes = [
   {
@@ -25,11 +27,13 @@ const homeRoute: Routes = [
     HomeComponent,
     ChatComponent,
     AboutComponent,
-    AccountComponent
+    AccountComponent,
+    MakeCallComponent
   ],
   imports: [
     RouterModule.forChild(homeRoute),
     CommonModule
-  ]
+  ],
+  entryComponents: [MakeCallComponent]
 })
 export class HomeModule { }

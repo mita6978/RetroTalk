@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MakeCallComponent } from './make-call/make-call.component';
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: NgbModal) {}
 
   ngOnInit(): void {
   }
 
+
+  open() {
+    const modalRef = this.modalService.open(MakeCallComponent);
+    modalRef.componentInstance.name = 'World';
+  }
 }
