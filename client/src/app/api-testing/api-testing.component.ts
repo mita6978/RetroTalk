@@ -16,18 +16,20 @@ export class ApiTestingComponent implements OnInit {
 
   get() {
     // Replace this with the API endpoint URL.
+    // Example: '/api/mywonderfulendpoint'
     const queryString = '';
-    this.apiTestingService.get(queryString).subscribe((responsePayload: any) => console.log(responsePayload),
-    (error: any) => console.log(error));
+    this.apiTestingService.get(queryString).subscribe((responsePayload: any) => console.log('success: ', responsePayload),
+    (error: any) => console.log('error: ', error));
   }
 
   put() {
     // Replace this with the API endpoint URL.
     const queryString = '';
     // Replace this with the API request payload.
+    // Example request payload: {funStuff: 'my fun string', funNum: 9}
     const requestPayload = {};
-    this.apiTestingService.put(queryString, requestPayload).subscribe((responsePayload: any) => console.log(responsePayload),
-    (error: any) => console.log(error));
+    this.apiTestingService.put(queryString, requestPayload).subscribe((responsePayload: any) => console.log('success: ', responsePayload),
+    (error: any) => console.log('error: ', error));
   }
 
   post() {
@@ -35,16 +37,16 @@ export class ApiTestingComponent implements OnInit {
     const queryString = '';
     // Replace this with the API request payload.
     const requestPayload = {};
-    this.apiTestingService.post(queryString, requestPayload).subscribe((responsePayload: any) => console.log(responsePayload),
-    (error: any) => console.log(error));
+    this.apiTestingService.post(queryString, requestPayload).subscribe((responsePayload: any) => console.log( 'success: ', responsePayload),
+    (error: any) => console.log('error: ', error));
   }
 
   delete() {
     // Replace this with the API endpoint URL.
     const queryString = '';
     this.apiTestingService.delete(queryString).subscribe(
-      (responsePayload: any) => console.log(responsePayload),
-      (error: any) => console.log(error));
+      (responsePayload: any) => console.log('success: ', responsePayload),
+      (error: any) => console.log('error: ', error));
   }
 
 }
