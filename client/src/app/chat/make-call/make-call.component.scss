@@ -8,3 +8,9 @@
   .light-blue-backdrop {
     background-color: #5cb3fd;
   }
+
+  .reto-modal-body {
+    min-height: 250px;
+    max-height: 400px;
+    overflow-y: auto;
+  }

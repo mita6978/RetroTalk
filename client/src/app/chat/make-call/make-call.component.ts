@@ -10,39 +10,13 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class MakeCallComponent implements OnInit {
 
-  closeResult: string;
+  @Input() name;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(public activeModal: NgbActiveModal) {}
 
-  openBackDropCustomClass(content) {
-    this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
-  }
-
-  openWindowCustomClass(content) {
-    this.modalService.open(content, { windowClass: 'dark-modal' });
-  }
-
-  openSm(content) {
-    this.modalService.open(content, { size: 'sm' });
-  }
-
-  openLg(content) {
-    this.modalService.open(content, { size: 'lg' });
-  }
-
-  openXl(content) {
-    this.modalService.open(content, { size: 'xl' });
-  }
-
-  openVerticallyCentered(content) {
-    this.modalService.open(content, { centered: true });
-  }
-
-  openScrollableContent(longContent) {
-    this.modalService.open(longContent, { scrollable: true });
-  }
 
   ngOnInit(): void {
+    console.log('I ran');
   }
 
 }
