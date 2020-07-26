@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h4 class="modal-title">Incoming Call</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">      
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <img src="../../../../assets/placeholder_tv.png" >
+  <div>
+    <button type="button" class="btn btn-outline-light btn-success" (click)="activeModal.close('Close click')">Accept</button>
+    <button type="button" class="btn btn-outline-light btn-danger" (click)="activeModal.close('Close click')">Decline</button>
+  </div>
+</div>
