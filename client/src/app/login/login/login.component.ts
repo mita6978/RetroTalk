@@ -16,9 +16,4 @@ export class LoginComponent implements OnInit {
     this.auth.userProfile$.subscribe((user) => console.log(user));
   }
 
-
-  signInWithFB(): void {
-    this.auth.login();
-  }
-
 }
