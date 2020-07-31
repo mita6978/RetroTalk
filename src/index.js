@@ -13,8 +13,9 @@ const port = process.env.PORT || 3000;
 // Download the helper library from https://www.twilio.com/docs/node/install
 // Your Account Sid and Auth Token from twilio.com/console
 // DANGER! This is insecure. See http://twil.io/secure
-const accountSid = 'ACd1b4707920db5c13b078db0c02732122';
-const authToken = 'f795edadf5078f7cc8e32314bf0995a0';
+console.log(process.env.accountSid)
+const accountSid = process.env.accountSid;
+const authToken = process.env.authToken;
 const client = require('twilio')(accountSid, authToken);
 
 
@@ -22,8 +23,9 @@ const AccessToken = require('twilio').jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
 
 // Used when generating any kind of Access Token
-const twilioApiKey = 'SK14dd48d995c9d04bcd383430bb2ba40f';
-const twilioApiSecret = 'JuAlyDVJnJ88Kk6tWdDaoiKipiajxjXx';
+const twilioApiKey = process.env.SID;
+
+const twilioApiSecret = process.env.Secret;
 
 
 
