@@ -13,7 +13,6 @@ const port = process.env.PORT || 3000;
 // Download the helper library from https://www.twilio.com/docs/node/install
 // Your Account Sid and Auth Token from twilio.com/console
 // DANGER! This is insecure. See http://twil.io/secure
-console.log(process.env.accountSid)
 const accountSid = process.env.accountSid;
 const authToken = process.env.authToken;
 const client = require('twilio')(accountSid, authToken);
