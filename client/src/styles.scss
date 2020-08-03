@@ -42,6 +42,13 @@ html {
     max-width: 100%;
     z-index: -1;
   }
+
+  .user-status {
+    position:absolute;
+    left: 150px;
+    top: 408px;
+    z-index: -2;
+  }
   .video {
     position:absolute;
     left: 100px;
@@ -61,3 +68,11 @@ p {
   font-size: 18px;
 }
 
+
+.tv-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -120px;
+  margin-left: -117px;
+}

@@ -1,1 +1,45 @@
-<button type="button" class="btn btn-primary" (click)="open()">Make a Call</button>
+<div class="container" *ngIf="!showLoader">
+  <!-- <div class="container" *ngIf="!showLoader"> -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="header-buffer">&nbsp;</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <div class="big-tv-container">
+        <img class="tv-overlay" src="../../assets/tv_overlay.png" (load)="pageLoaded()">
+        <img class="user-status" src="../../assets/chat/arthur_calling.png">
+        <video class="video" #video poster="../../../assets/blank_video_bg.jpg" src="../../assets/chat/waiting_video_final.mp4" loop></video>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 offset-sm-1 text-center">
+      <button type="button" class="btn btn-success btn-lg">START CALL <i class="fa fa-phone"></i></button>
+    </div>
+    <div class="col-sm-4 offset-sm-2 text-center">
+      <button type="button" class="btn btn-danger btn-lg">END CALL <i class="fa fa-times"></i></button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 footer-buffer">
+    </div>
+  </div>
+</div>
+<img src="../../assets/loader1.gif" class="tv-loader" *ngIf="showLoader">
+
+<!-- Preload all of the below -->
+<img src="../../assets/blank_video_bg.jpg" hidden #blankVideoBG>
+<video src="../../assets/chat/phone_call_final.mp4" hidden preload="auto" #phoneCallVid></video>
+<audio src="../../assets/chat/phone_ring.mp3" hidden preload="auto" #phoneRingMP3></audio>
+<img class="user-status" src="../../assets/chat/arthur_offline.png" hidden #arthurOfflineImg>
+<img class="user-status" src="../../assets/chat/arthur_online.png" hidden #arthurOnlineImg>
+<img class="user-status" src="../../assets/chat/arthur_calling.png" hidden #arthurCallingImg>
+<img class="user-status" src="../../assets/chat/starman_online.png" hidden #starmanOnlineImg>
+<img class="user-status" src="../../assets/chat/starman_offline.png" hidden #starmanOfflineImg>
+<img class="user-status" src="../../assets/chat/starman_calling.png" hidden #starmanCallingImg>
+
+<img src="../../assets/menu/chat.gif" hidden #chatOrb>
+<img src="../../assets/menu/about.gif" hidden #aboutOrb>
+<img src="../../assets/menu/docs.gif" hidden #codeOrb>

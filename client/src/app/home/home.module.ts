@@ -18,7 +18,8 @@ const homeRoute: Routes = [
     children: [
       { path: 'chat', component: ChatComponent },
       { path: 'about', component: AboutComponent },
-      { path: 'account', component: AccountComponent }
+      { path: 'account', component: AccountComponent },
+      { path: '',   redirectTo: '/home/chat', pathMatch: 'full' },
     ]
   }
 ];
