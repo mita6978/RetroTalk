@@ -1,10 +1,22 @@
-<div style="width:100%; text-align: center;">
+<div style="width:100%; text-align: center;" *ngIf="showMenu">
   <div class="retro-menu">
     <a routerLink="/home/chat"><img src="../../../assets/menu/chat.gif"></a>
-    <a routerLink="/home/account"><img src="../../../assets/menu/account.gif"></a>
     <a routerLink="/home/about"><img src="../../../assets/menu/about.gif"></a>
     <img src="../../../assets/menu/docs.gif">
   </div>
 </div>
 <router-outlet></router-outlet>
-<button type="button" class="btn btn-primary" (click)="open()">Answer Call Dialog</button>
+<!-- Preload all of the below -->
+<img src="../../../assets/blank_video_bg.jpg" hidden #blankVideoBG>
+<video src="../../../assets/chat/phone_call_final.mp4" hidden preload="auto" #phoneCallVid></video>
+<audio src="../../../assets/chat/phone_ring.mp3" hidden preload="auto" #phoneRingMP3></audio>
+<img class="user-status" src="../../../assets/chat/arthur_offline.png" hidden #arthurOfflineImg>
+<img class="user-status" src="../../../assets/chat/arthur_online.png" hidden #arthurOnlineImg>
+<img class="user-status" src="../../../assets/chat/arthur_calling.png" hidden #arthurCallingImg>
+<img class="user-status" src="../../../assets/chat/starman_online.png" hidden #starmanOnlineImg>
+<img class="user-status" src="../../../assets/chat/starman_offline.png" hidden #starmanOfflineImg>
+<img class="user-status" src="../../../assets/chat/starman_calling.png" hidden #starmanCallingImg>
+
+<img src="../../../assets/menu/chat.gif" hidden #chatOrb>
+<img src="../../../assets/menu/about.gif" hidden #aboutOrb>
+<img src="../../../assets/menu/docs.gif" hidden #codeOrb>

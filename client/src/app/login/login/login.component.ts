@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +9,30 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public auth: AuthService) {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
-    this.auth.userProfile$.subscribe((user) => console.log(user));
+  }
+
+  selectCharacter(name: string): void {
+    this.router.navigate(['/preview']);
+  }
+
+  get starmanTaken(): boolean {
+    return false;
+  }
+
+  get starmanBorderTaken(): string {
+    return this.starmanTaken ? '#ff3603' : '';
+  }
+
+  get arthurTaken(): boolean {
+    return true;
+  }
+
+  get arthurBorderTaken(): string {
+    return this.arthurTaken ? '#ff3603' : '';
   }
 
 }

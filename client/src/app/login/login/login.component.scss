@@ -1,72 +1,54 @@
-/* Arthur and StarMan orbs @ Login */
-.row{
-  margin-top: 120px;
+.orb-container {
+  height: 100%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+
 }
 
-.arthur-orb{
-  border: 7px solid rgb(40, 35, 16);
+.orb-row {
+  height: 100%;
+  position: relative;
+}
+
+.orb {
   border-radius: 50%;
-  width:320px;
-  height:320px;
+  margin-left: 5%;
+  margin-right: 5%;
+  display: inline-block;
+  width: 40%;
+  border: solid rgb(40, 35, 16) 10px;
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+  transition: all 1s;
+}
+.orb:hover {
+  transform: scale(1.1);
+  border-color:  #ff3603;
+}
+
+.arthur {
   background-image: url(../../../assets/login_orbs/arthur.jpg);
-  background-size: 100%;
-  transition-property: all;
-  transition-duration: 1s;
-  transition-timing-function: ease;
-  transition-delay: 0s;
-  margin-left:auto;
-  margin-right:auto;
 }
 
-.arthur-orb:hover{
-  border-color: #ff3603;
-  transform: scale(1.1);
-}
-
-.select-arthur{
-  opacity: 0;
-  border-radius: 50%;
-  widows:320px;
-  height:320px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:all 1s;
-}
-
-.select-arthur:hover{
-  opacity:1;
-}
-
-.starman-orb{
-  border: 7px solid rgb(40, 35, 16);
-  border-radius: 50%;
-  width:320px;
-  height:320px;
+.starman {
   background-image: url(../../../assets/login_orbs/starman.jpg);
-  background-size: 100%;
-  transition-property: all;
-  transition-duration: 1s;
-  transition-timing-function: ease;
-  transition-delay: 0s;
-  margin-left:auto;
-  margin-right:auto;
 }
 
-.starman-orb:hover{
-  border-color: #ff3603;
-  transform: scale(1.1);
-}
 
-.select-starman{
+.orb-overlay-image {
+  width: 100%;
   opacity: 0;
   border-radius: 50%;
-  widows:305px;
-  height:305px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:all 1s;
+  transition: all 1s;
 }
 
-.select-starman:hover{
-  opacity:1;
+.orb-overlay-image:hover {
+  opacity: 1;
 }
+
+.orb-overlay-image-taken {
+  width: 100%;
+  border-radius: 50%;
+}
+

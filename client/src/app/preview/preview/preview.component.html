@@ -1,1 +1,42 @@
-<p>preview works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="header-buffer">&nbsp;</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10 offset-sm-1">
+      <div class="row">
+        <div class="col-sm-6 offset-sm-3 text-center">
+          <h1>Test Your Webcam</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <div class="big-tv-container">
+        <img class="tv-overlay" src="../../../assets/tv_overlay.png">
+        <video class="video" #video poster="../../../assets/camera_preview_failed.jpg"></video>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 offset-sm-1 text-center">
+      <h2>I Don't See Myself 😢</h2>
+    </div>
+    <div class="col-sm-4 offset-sm-2 text-center">
+      <h2>I See Myself 	😀</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 text-center">
+      <p>Please use Google Chrome <i class="fab fa-chrome fa-lg"></i></p>
+      <p>If you do not see yourself <a href="https://support.google.com/chrome/answer/2693767?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">click here</a> for instructions on how to select your webcam to use on this site.</p>
+    </div>
+    <div class="col-sm-6 text-center">
+      <button class="btn btn-primary move-button btn-lg" (click)="startChatting()"><i class="fa fa-play"></i> &nbsp; START CHATTING!</button>
+    </div>
+  </div>
+</div>
+
