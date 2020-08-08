@@ -1,7 +1,9 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, HostListener, Renderer2 } from '@angular/core';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { MakeCallComponent } from './make-call/make-call.component';
+import { connect, createLocalTracks } from 'twilio-video';
+
+import { IPhoneCall, IState, AppStateService } from '../shared/services/app-state.service';
+import { ECharacters } from '../shared/services/models/characters.enum';
 
 @Component({
   selector: 'app-chat',
@@ -21,8 +23,31 @@ export class ChatComponent implements OnInit, AfterViewInit {
   starmanOnlineImgLoaded = false;
   starmanOfflineImgLoaded = false;
   starmanCallingImgLoaded = false;
+  callingArthurImgLoaded = false;
+  callingStarmanLoaded = false;
+
+  hidePeerVideo = true;
+
+  state: IState = {
+    isArthurTaken: false,
+    isArthurReady: false,
+    isStarmantaken: false,
+    isStarmanReady: false,
+    phoneCall: {
+        arthurToken: null,
+        starmanToken: null,
+        arthurCallingStarman: false,
+        starmanCallingArthur: false,
+        phoneCallActive: false,
+        roomsid: null,
+        roomUniqueName: null
+    }};
+
+    room: any;
+    oldPeerTrack: any;
 
   @ViewChild('video') private video: ElementRef;
+  @ViewChild('participentVideo') private participentVideo: ElementRef;
 
   @ViewChild('chatOrb') private chatOrb: ElementRef;
   @ViewChild('aboutOrb') private aboutOrb: ElementRef;
@@ -37,10 +62,27 @@ export class ChatComponent implements OnInit, AfterViewInit {
   @ViewChild('starmanOnlineImg') private starmanOnlineImg: ElementRef;
   @ViewChild('starmanOfflineImg') private starmanOfflineImg: ElementRef;
   @ViewChild('starmanCallingImg') private starmanCallingImg: ElementRef;
+  @ViewChild('callingArthurImg') private callingArthurImg: ElementRef;
+  @ViewChild('callingStarmanImg') private callingStarmanImg: ElementRef;
 
-  constructor(private modalService: NgbModal) {}
+  @HostListener('window:beforeunload', ['$event'])
+  beforeunloadHandler(event): void {
+    if (this.room !== undefined && this.room.disconnect !== undefined) {
+     this.room.disconnect();
+    }
+  }
+
+  constructor(private appStateService: AppStateService, private renderer: Renderer2) {}
 
   ngOnInit(): void {
+    this.appStateService.state$.subscribe((state: IState) => {
+
+      this.state = {...this.state, ...state};
+
+      if (this.state.phoneCall.phoneCallActive === true) {
+        this.participentAnswered();
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -92,16 +134,152 @@ export class ChatComponent implements OnInit, AfterViewInit {
       this.starmanCallingImgLoaded = true;
     };
 
+    this.callingArthurImg.nativeElement.onload = () => {
+      this.callingArthurImgLoaded = true;
+    };
+
+    this.callingStarmanImg.nativeElement.onload = () => {
+      this.callingStarmanLoaded = true;
+    };
   }
 
   pageLoaded(): void {
     this.video.nativeElement.play();
   }
 
+  participentAnswered(): void {
+        // Option 1
+        createLocalTracks({
+          audio: true,
+          video: { width: 640 }
+        }).then(localTracks => {
+          const token = this.appStateService.selectedCharacter === ECharacters.ARTHUR ?
+          this.state.phoneCall.arthurToken : this.state.phoneCall.starmanToken;
+          return connect(token, {
+            name: this.state.phoneCall.roomUniqueName,
+            tracks: localTracks,
+          });
+        }).then(room => {
+          this.room = room;
+          room.participants.forEach(participant => {
 
-  open(): void {
-    const modalRef = this.modalService.open(MakeCallComponent);
-    modalRef.componentInstance.name = 'World';
+            participant.on('trackSubscribed', track => {
+
+              this.oldPeerTrack = track.attach();
+              this.video.nativeElement.pause();
+              this.hidePeerVideo = false;
+
+              this.renderer.appendChild(this.participentVideo.nativeElement, track.attach());
+            });
+          });
+
+
+          room.once('participantConnected', participant => {
+            participant.tracks.forEach(publication => {
+
+              if (publication.isSubscribed) {
+                const track = publication.track;
+
+                this.oldPeerTrack = track.attach();
+                this.video.nativeElement.pause();
+                this.hidePeerVideo = false;
+
+                this.renderer.appendChild(this.participentVideo.nativeElement, track.attach());
+
+              }
+            });
+
+            participant.on('trackSubscribed', track => {
+              this.oldPeerTrack = track.attach();
+              this.video.nativeElement.pause();
+              this.hidePeerVideo = false;
+              this.renderer.appendChild(this.participentVideo.nativeElement, track.attach());
+            });
+
+          });
+          // Log Participants as they disconnect from the Room
+          room.once('participantDisconnected', participant => {
+
+            const childElements = Array.from(this.participentVideo.nativeElement.children);
+            for (const child of childElements) {
+              this.renderer.removeChild(this.participentVideo.nativeElement, child);
+            }
+
+            this.callEnded();
+          });
+        });
+  }
+
+  startCall(): void {
+    const phoneCall: IPhoneCall = {
+      ...this.state.phoneCall,
+      arthurCallingStarman: this.appStateService.selectedCharacter === ECharacters.ARTHUR,
+      starmanCallingArthur: this.appStateService.selectedCharacter === ECharacters.STARMAN,
+      phoneCallActive: false
+    };
+    this.appStateService.phoneCall(phoneCall);
+  }
+
+  hangUp(): void {
+    if (this.room !== undefined && this.room.disconnect !== undefined) {
+      this.room.disconnect();
+      const childElements = Array.from(this.participentVideo.nativeElement.children);
+      for (const child of childElements) {
+        this.renderer.removeChild(this.participentVideo.nativeElement, child);
+      }
+      this.callEnded();
+    }
+  }
+
+  callEnded(): void {
+    const phoneCall: IPhoneCall = {
+      arthurToken: null,
+      starmanToken: null,
+      arthurCallingStarman: false,
+      starmanCallingArthur: false,
+      phoneCallActive: false,
+      roomsid: null,
+      roomUniqueName: null
+    };
+    this.appStateService.phoneCall(phoneCall);
+    this.video.nativeElement.play();
+    this.hidePeerVideo = true;
+  }
+
+  get showArthurOffline(): boolean {
+    return this.appStateService.selectedCharacter === ECharacters.STARMAN && this.state.isArthurReady === false &&
+    this.state.phoneCall.phoneCallActive === false;
+  }
+
+  get showArthurOnline(): boolean {
+    return this.appStateService.selectedCharacter === ECharacters.STARMAN && this.state.phoneCall.phoneCallActive === false &&
+    this.state.isArthurReady === true && this.state.phoneCall.starmanCallingArthur === false;
+  }
+
+  get showCallingArthur(): boolean {
+    return this.appStateService.selectedCharacter === ECharacters.STARMAN && this.state.phoneCall.phoneCallActive === false &&
+    this.state.isArthurReady === true && this.state.phoneCall.starmanCallingArthur === true;
+  }
+
+  get showStarmanOffline(): boolean {
+    return this.appStateService.selectedCharacter === ECharacters.ARTHUR && this.state.isStarmanReady === false &&
+    this.state.phoneCall.phoneCallActive === false;
+  }
+
+  get showStarmanOnline(): boolean {
+    return this.appStateService.selectedCharacter === ECharacters.ARTHUR && this.state.phoneCall.phoneCallActive === false &&
+    this.state.isStarmanReady === true && this.state.phoneCall.arthurCallingStarman === false;
+  }
+
+  get showCallingStarman(): boolean {
+    return this.appStateService.selectedCharacter === ECharacters.ARTHUR && this.state.phoneCall.phoneCallActive === false &&
+    this.state.isStarmanReady === true && this.state.phoneCall.arthurCallingStarman === true;
+  }
+
+  get disableCallButton(): boolean {
+    return this.showCallingStarman === true || this.showCallingArthur === true ||
+    (this.showArthurOffline === false && this.showArthurOnline === false && this.showCallingArthur === false &&
+      this.showStarmanOffline === false && this.showStarmanOnline === false && this.showCallingStarman === false) === true;
   }
 
   get showLoader(): boolean {
@@ -115,6 +293,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
     this.arthurOnlineImgLoaded === false ||
     this.arthurCallingImgLoaded === false ||
     this.starmanOfflineImgLoaded === false ||
+    this.callingArthurImgLoaded === false ||
+    this.callingStarmanLoaded === false ||
     this.starmanOnlineImgLoaded === false;
   }
 }

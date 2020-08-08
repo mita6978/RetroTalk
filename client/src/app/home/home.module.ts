@@ -7,7 +7,6 @@ import { AboutComponent } from './../about/about.component';
 import { ChatComponent } from './../chat/chat.component';
 import { HomeComponent } from './home/home.component';
 
-import { MakeCallComponent } from '../chat/make-call/make-call.component';
 import { AnswerCallModalComponent } from './home/answer-call-modal/answer-call-modal.component';
 
 
@@ -30,7 +29,6 @@ const homeRoute: Routes = [
     ChatComponent,
     AboutComponent,
     AccountComponent,
-    MakeCallComponent,
     AnswerCallModalComponent
   ],
   imports: [
@@ -38,7 +36,6 @@ const homeRoute: Routes = [
     CommonModule
   ],
   entryComponents: [
-    MakeCallComponent,
     AnswerCallModalComponent
   ]
 })

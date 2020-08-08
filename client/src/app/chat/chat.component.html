@@ -9,17 +9,25 @@
     <div class="col-sm-12 text-center">
       <div class="big-tv-container">
         <img class="tv-overlay" src="../../assets/tv_overlay.png" (load)="pageLoaded()">
-        <img class="user-status" src="../../assets/chat/arthur_calling.png">
-        <video class="video" #video poster="../../../assets/blank_video_bg.jpg" src="../../assets/chat/waiting_video_final.mp4" loop></video>
+
+        <img class="user-status" src="../../assets/chat/arthur_offline.png" *ngIf="showArthurOffline">
+        <img class="user-status" src="../../assets/chat/arthur_online.png" *ngIf="showArthurOnline">
+        <img class="user-status" src="../../assets/chat/arthur_calling.png" *ngIf="showCallingArthur">
+
+        <img class="user-status" src="../../assets/chat/starman_offline.png" *ngIf="showStarmanOffline">
+        <img class="user-status" src="../../assets/chat/starman_online.png" *ngIf="showStarmanOnline">
+        <img class="user-status" src="../../assets/chat/starman_calling.png" *ngIf="showCallingStarman">
+        <div #participentVideo class="video" [hidden]="hidePeerVideo"></div>
+        <video class="video" #video poster="../../assets/blank_video_bg.jpg" src="../../assets/chat/waiting_video_final.mp4" loop [hidden]="!hidePeerVideo"></video>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-4 offset-sm-1 text-center">
-      <button type="button" class="btn btn-success btn-lg">START CALL <i class="fa fa-phone"></i></button>
+      <button type="button" class="btn btn-success btn-lg" (click)="startCall()" [disabled]="disableCallButton">START CALL <i class="fa fa-phone"></i></button>
     </div>
     <div class="col-sm-4 offset-sm-2 text-center">
-      <button type="button" class="btn btn-danger btn-lg">END CALL <i class="fa fa-times"></i></button>
+      <button type="button" class="btn btn-danger btn-lg" (click)="hangUp()" [disabled]="!disableCallButton">END CALL <i class="fa fa-times"></i></button>
     </div>
   </div>
   <div class="row">
@@ -39,6 +47,8 @@
 <img class="user-status" src="../../assets/chat/starman_online.png" hidden #starmanOnlineImg>
 <img class="user-status" src="../../assets/chat/starman_offline.png" hidden #starmanOfflineImg>
 <img class="user-status" src="../../assets/chat/starman_calling.png" hidden #starmanCallingImg>
+<img src="../../assets/chat/calling_arthur.png" hidden #callingArthurImg>
+<img src="../../assets/chat/calling_starman.png" hidden #callingStarmanImg>
 
 <img src="../../assets/menu/chat.gif" hidden #chatOrb>
 <img src="../../assets/menu/about.gif" hidden #aboutOrb>

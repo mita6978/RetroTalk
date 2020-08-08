@@ -2,11 +2,11 @@
 <div class="orb-container">
   <div class="orb-row">
       <div class="orb arthur" [style.border-color]="arthurBorderTaken">
-        <img src="../../../assets/login_orbs/arthur_overlap_bw.png" (click)="selectCharacter('arthur')" [hidden]="arthurTaken" class="orb-overlay-image">
+        <img src="../../../assets/login_orbs/arthur_overlap_bw.png" (click)="takeArthur()" [hidden]="arthurTaken" class="orb-overlay-image">
         <img src="../../../assets/login_orbs/arthur_overlap_taken_bw.png" [hidden]="!arthurTaken" class="orb-overlay-image-taken">
       </div>
       <div class="orb starman" [style.border-color]="starmanBorderTaken">
-        <img src="../../../assets/login_orbs/starman_overlap_bw.png" (click)="selectCharacter('starman')" [hidden]="starmanTaken" class="orb-overlay-image">
+        <img src="../../../assets/login_orbs/starman_overlap_bw.png" (click)="takeStarman()" [hidden]="starmanTaken" class="orb-overlay-image">
         <img src="../../../assets/login_orbs/starman_overlap_taken_bw.png" [hidden]="!starmanTaken" class="orb-overlay-image-taken">
       </div>
   </div>

@@ -1,7 +1,9 @@
+import { ECharacters } from './../../shared/services/models/characters.enum';
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AnswerCallModalComponent } from './answer-call-modal/answer-call-modal.component';
+import { AppStateService, IState, IPhoneCall } from 'src/app/shared/services/app-state.service';
 
 
 @Component({
@@ -22,6 +24,23 @@ export class HomeComponent implements AfterViewInit {
   starmanOnlineImgLoaded = false;
   starmanOfflineImgLoaded = false;
   starmanCallingImgLoaded = false;
+  callingArthurImgLoaded = false;
+  callingStarmanLoaded = false;
+
+  state: IState = {
+    isArthurTaken: false,
+    isArthurReady: false,
+    isStarmantaken: false,
+    isStarmanReady: false,
+    phoneCall: {
+        arthurToken: null,
+        starmanToken: null,
+        arthurCallingStarman: false,
+        starmanCallingArthur: false,
+        phoneCallActive: false,
+        roomsid: null,
+        roomUniqueName: null
+    }};
 
   @ViewChild('chatOrb') private chatOrb: ElementRef;
   @ViewChild('aboutOrb') private aboutOrb: ElementRef;
@@ -36,9 +55,11 @@ export class HomeComponent implements AfterViewInit {
   @ViewChild('starmanOnlineImg') private starmanOnlineImg: ElementRef;
   @ViewChild('starmanOfflineImg') private starmanOfflineImg: ElementRef;
   @ViewChild('starmanCallingImg') private starmanCallingImg: ElementRef;
+  @ViewChild('callingArthurImg') private callingArthurImg: ElementRef;
+  @ViewChild('callingStarmanImg') private callingStarmanImg: ElementRef;
 
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private appStateService: AppStateService) { }
 
   ngAfterViewInit(): void {
     this.chatOrb.nativeElement.onload = () => {
@@ -88,13 +109,59 @@ export class HomeComponent implements AfterViewInit {
     this.starmanCallingImg.nativeElement.onload = () => {
       this.starmanCallingImgLoaded = true;
     };
+
+    this.callingArthurImg.nativeElement.onload = () => {
+      this.callingArthurImgLoaded = true;
+    };
+
+    this.callingStarmanImg.nativeElement.onload = () => {
+      this.callingStarmanLoaded = true;
+    };
+
+    this.initMusic();
+  }
+
+  initMusic(): void {
+    this.appStateService.state$.subscribe((state: IState) => {
+
+      if (this.appStateService.selectedCharacter === ECharacters.ARTHUR && state.phoneCall.starmanCallingArthur === true) {
+        this.phoneRingMP3.nativeElement.play();
+        this.open(ECharacters.STARMAN);
+      }
+
+      if (this.appStateService.selectedCharacter === ECharacters.STARMAN  && state.phoneCall.arthurCallingStarman === true) {
+        this.phoneRingMP3.nativeElement.play();
+        this.open(ECharacters.ARTHUR);
+      }
+
+    });
   }
 
 
-
-  open() {
+  open(characterCalling: ECharacters): void {
     const modalRef = this.modalService.open(AnswerCallModalComponent);
-    modalRef.componentInstance.name = 'World';
+    modalRef.componentInstance.name = characterCalling;
+    modalRef.result.then((answered: boolean) => {
+      if (answered === true) {
+        const phoneCall: IPhoneCall = {
+          ...this.state.phoneCall,
+          arthurCallingStarman: false,
+          starmanCallingArthur: false,
+          phoneCallActive: true
+        };
+        this.appStateService.phoneCall(phoneCall);
+      } else {
+        const phoneCall: IPhoneCall = {
+          ...this.state.phoneCall,
+          arthurCallingStarman: false,
+          starmanCallingArthur: false,
+          phoneCallActive: false
+        };
+        this.appStateService.phoneCall(phoneCall);
+      }
+      this.phoneRingMP3.nativeElement.pause();
+      this.phoneRingMP3.nativeElement.currentTime = 0;
+    });
   }
 
   get showMenu(): boolean {
@@ -109,6 +176,8 @@ export class HomeComponent implements AfterViewInit {
     this.arthurCallingImgLoaded === true &&
     this.starmanOfflineImgLoaded === true &&
     this.starmanCallingImgLoaded === true &&
+    this.callingArthurImgLoaded === true &&
+    this.callingStarmanLoaded === true &&
     this.starmanOnlineImgLoaded === true;
   }
 }
