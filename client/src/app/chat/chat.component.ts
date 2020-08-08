@@ -170,6 +170,13 @@ export class ChatComponent implements OnInit, AfterViewInit {
               this.hidePeerVideo = false;
 
               this.renderer.appendChild(this.participentVideo.nativeElement, track.attach());
+              // this.participentVideo.nativeElement.style.width = '50%';
+              const childElements = Array.from(this.participentVideo.nativeElement.children);
+              for (const child of childElements) {
+                if (child as HTMLElement && (child as HTMLElement).style) {
+                  (child as HTMLElement).style.width = '640px';
+                }
+              }
             });
           });
 
@@ -185,7 +192,13 @@ export class ChatComponent implements OnInit, AfterViewInit {
                 this.hidePeerVideo = false;
 
                 this.renderer.appendChild(this.participentVideo.nativeElement, track.attach());
-
+                // this.participentVideo.nativeElement.style.width = '50%';
+                const childElements = Array.from(this.participentVideo.nativeElement.children);
+                for (const child of childElements) {
+                  if (child as HTMLElement && (child as HTMLElement).style) {
+                    (child as HTMLElement).style.width = '640px';
+                  }
+                }
               }
             });
 
@@ -194,6 +207,13 @@ export class ChatComponent implements OnInit, AfterViewInit {
               this.video.nativeElement.pause();
               this.hidePeerVideo = false;
               this.renderer.appendChild(this.participentVideo.nativeElement, track.attach());
+              // this.participentVideo.nativeElement.style.width = '50%';
+              const childElements = Array.from(this.participentVideo.nativeElement.children);
+              for (const child of childElements) {
+                if (child as HTMLElement && (child as HTMLElement).style) {
+                  (child as HTMLElement).style.width = '640px';
+                }
+              }
             });
 
           });
