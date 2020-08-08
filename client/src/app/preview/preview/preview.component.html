@@ -35,7 +35,7 @@
       <p>If you do not see yourself <a href="https://support.google.com/chrome/answer/2693767?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">click here</a> for instructions on how to select your webcam to use on this site.</p>
     </div>
     <div class="col-sm-6 text-center">
-      <button class="btn btn-primary move-button btn-lg" (click)="startChatting()"><i class="fa fa-play"></i> &nbsp; START CHATTING!</button>
+      <button class="btn btn-primary move-button btn-lg" (click)="startChatting()" [disabled]="nextButtonDisabled"><i class="fa fa-play"></i> &nbsp; START CHATTING!</button>
     </div>
   </div>
 </div>

@@ -16,10 +16,10 @@ button {
   font-family: "Retro Nouveau";
 }
 
-$fa-font-path:  "@fortawesome/fontawesome-free/webfonts";
-@import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
-@import "@fortawesome/fontawesome-free/scss/solid.scss";
-@import "@fortawesome/fontawesome-free/scss/brands.scss";
+$fa-font-path:  "~@fortawesome/fontawesome-free/webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
 
 html {
   height: 100%;
@@ -49,6 +49,7 @@ html {
     top: 408px;
     z-index: -2;
   }
+
   .video {
     position:absolute;
     left: 100px;
@@ -56,6 +57,9 @@ html {
     width: 640px;
     height: 480px;
     z-index: -3;
+    background-image: url('./assets/blank_video_bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }
 

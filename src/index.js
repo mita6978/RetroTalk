@@ -31,7 +31,9 @@ const twilioApiSecret = process.env.Secret;
 
 let state = { 
     isArthurTaken: false,
+    isArthurReady: false,
     isStarmantaken: false,
+    isStarmanReady: false,
     phoneCall: {
         arthurToken: null,
         starmanToken: null,
@@ -54,6 +56,11 @@ io.on('connection', (socket) => {
 
         if(characterState === 'ARTHUR_AVAILABLE') {
             state.isArthurTaken = false;
+            state.isArthurReady = false;
+        }
+
+        if(characterState === 'ARTHUR_READY') {
+            state.isArthurReady = true;
         }
 
         if(characterState === 'STARMAN_TAKEN') {
@@ -61,7 +68,12 @@ io.on('connection', (socket) => {
         }
 
         if(characterState === 'STARMAN_AVAILABLE') {
-            state.isArthurTaken = false;
+            state.isStarmantaken = false;
+            state.isStarmanReady = false;
+        }
+
+        if(characterState === 'STARMAN_READY') {
+            state.isStarmanReady = true;
         }
 
         io.to('retrotalk').emit('appState', state);
@@ -96,7 +108,7 @@ io.on('connection', (socket) => {
                 token.addGrant(videoGrant);
                 token2.addGrant(videoGrant2);
 
-                state = {...state, phoneCall: {...state.phoneCall, ...phoneCall, roomsid: room.sid, starmanCallingArthur: false, arthurCallingStarman: false}};
+                state = {...state, phoneCall: {...state.phoneCall, ...phoneCall, roomsid: room.sid, starmanCallingArthur: false, arthurCallingStarman: false, roomUniqueName: state.phoneCall.roomUniqueName}};
                 // Serialize the token to a JWT string
                 state.phoneCall.arthurToken = token.toJwt();
                 state.phoneCall.starmanToken = token2.toJwt();
@@ -107,21 +119,25 @@ io.on('connection', (socket) => {
                 client.video.rooms('retrotalk')
                 .update({status: 'completed'})
                 .then(room => {
-                    state = {...state, phoneCall: {...state.phoneCall, ...phoneCall, roomsid: null, arthurToken: null, starmanToken: null}};
-                    io.to('retrotalk').emit('appState', state);
+                    console.log(ran)
                 });
+                state = {...state, phoneCall: {...state.phoneCall, ...phoneCall, roomUniqueName: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}};
+                io.to('retrotalk').emit('appState', state);
             } else {
-                state = {...state, phoneCall: {...state.phoneCall, ...phoneCall}};
+                state = {...state, phoneCall: {...state.phoneCall, ...phoneCall, roomUniqueName: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}};
                 io.to('retrotalk').emit('appState', state);
             }
         }
+        console.log(phoneCall);
     });
 
     socket.on('resetState', (reset) => {
         if(reset === true){
             const resetState = { 
                 isArthurTaken: false,
+                isArthurReady: false,
                 isStarmantaken: false,
+                isStarmanReady: false,
                 phoneCall: {
                     arthurToken: null,
                     starmanToken: null,

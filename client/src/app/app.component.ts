@@ -1,13 +1,38 @@
-import { Component } from '@angular/core';
-import { AuthService } from './shared/services/auth.service';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { AppStateService, ESetCharacterState } from './shared/services/app-state.service';
+import { ECharacters } from './shared/services/models/characters.enum';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'Welcome to RetroTalk';
+export class AppComponent implements OnInit {
 
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.shiftKey === true && event.code === 'Enter') {
+      this.appStateService.resetAppState();
+    }
+  }
 
+  @HostListener('window:beforeunload', ['$event'])
+  beforeunloadHandler(event): void {
+    if (this.appStateService.selectedCharacter === ECharacters.ARTHUR) {
+      this.appStateService.toggleCharacterTaken(ESetCharacterState.ARTHUR_AVAILABLE);
+    }
+
+    if (this.appStateService.selectedCharacter === ECharacters.STARMAN) {
+      this.appStateService.toggleCharacterTaken(ESetCharacterState.STARMAN_AVAILABLE);
+    }
+  }
+
+  constructor(private appStateService: AppStateService) {}
+
+  ngOnInit(): void {
+    this.appStateService.initAppState();
+    this.appStateService.state$.subscribe((state) => {
+      console.log(state);
+    });
+  }
 }

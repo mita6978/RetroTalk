@@ -1,13 +1,16 @@
 <div class="modal-header">
-  <h4 class="modal-title">Incoming Call</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">      
-    <span aria-hidden="true">&times;</span>
-  </button>
+  <h4 class="modal-title">Incoming Call...</h4>
 </div>
 <div class="modal-body">
-  <img src="../../../../assets/placeholder_tv.png" >
+  <img src="../../../../assets/chat/calling_arthur.png" *ngIf="name === 'Arthur'">
+  <img src="../../../../assets/chat/calling_starman.png" *ngIf="name === 'Starman'">
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+    <p>{{name}} is calling.</p>
+    </div>
+  </div>
   <div>
-    <button type="button" class="btn btn-outline-light btn-success" (click)="activeModal.close('Close click')">Accept</button>
-    <button type="button" class="btn btn-outline-light btn-danger" (click)="activeModal.close('Close click')">Decline</button>
+    <button type="button" class="btn btn-outline-light btn-success" (click)="activeModal.close(true)">Answer</button>
+    <button type="button" class="btn btn-outline-light btn-danger" (click)="activeModal.close(false)">Decline</button>
   </div>
 </div>
