@@ -109,20 +109,16 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/HomeModule.html" data-type="entity-link">HomeModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-HomeModule-40e39daf40ee4969721034701470d1c1"' : 'data-target="#xs-components-links-module-HomeModule-40e39daf40ee4969721034701470d1c1"' }>
+                                            'data-target="#components-links-module-HomeModule-b3778bfc26d04e5463748ebfaaece121"' : 'data-target="#xs-components-links-module-HomeModule-b3778bfc26d04e5463748ebfaaece121"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-HomeModule-40e39daf40ee4969721034701470d1c1"' :
-                                            'id="xs-components-links-module-HomeModule-40e39daf40ee4969721034701470d1c1"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-HomeModule-b3778bfc26d04e5463748ebfaaece121"' :
+                                            'id="xs-components-links-module-HomeModule-b3778bfc26d04e5463748ebfaaece121"' }>
                                             <li class="link">
                                                 <a href="components/AboutComponent.html"
                                                     data-type="entity-link" data-context="sub-entity" data-context-id="modules">AboutComponent</a>
-                                            </li>
-                                            <li class="link">
-                                                <a href="components/AccountComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">AccountComponent</a>
                                             </li>
                                             <li class="link">
                                                 <a href="components/AnswerCallModalComponent.html"
@@ -206,9 +202,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                                 <li class="link">
                                     <a href="injectables/AuthenticationStateService.html" data-type="entity-link">AuthenticationStateService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="injectables/AuthService.html" data-type="entity-link">AuthService</a>
                                 </li>
                             </ul>
                         </li>

@@ -166,15 +166,45 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(appStateService: <a href="../injectables/AppStateService.html">AppStateService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/about/about.component.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/about/about.component.ts:12</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>appStateService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AppStateService.html" target="_self" >AppStateService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -210,8 +240,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">src/app/about/about.component.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="16"
+                            class="link-to-prism">src/app/about/about.component.ts:16</a></div>
                 </td>
             </tr>
 
@@ -263,7 +293,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/about/about.component.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/about/about.component.ts:12</a></div>
                             </td>
                         </tr>
 
@@ -277,6 +307,8 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ViewChild, ElementRef, AfterViewInit } from &#x27;@angular/core&#x27;;
+import { ECharacters } from &#x27;../shared/services/models/characters.enum&#x27;;
+import { ESetCharacterState, AppStateService } from &#x27;../shared/services/app-state.service&#x27;;
 
 @Component({
   selector: &#x27;app-about&#x27;,
@@ -287,10 +319,21 @@ export class AboutComponent implements AfterViewInit {
 
   @ViewChild(&#x27;video&#x27;) private video: ElementRef;
 
-  constructor() { }
+  constructor(private appStateService: AppStateService) { }
 
   ngAfterViewInit(): void {
     this.video.nativeElement.play();
+
+    const character &#x3D; sessionStorage.getItem(&#x27;character&#x27;);
+    if (character &#x3D;&#x3D;&#x3D; ECharacters.ARTHUR) {
+      this.appStateService.setSelectedCharacter(ECharacters.ARTHUR);
+      this.appStateService.toggleCharacterTaken(ESetCharacterState.ARTHUR_TAKEN);
+    }
+
+    if (character &#x3D;&#x3D;&#x3D; ECharacters.STARMAN) {
+      this.appStateService.setSelectedCharacter(ECharacters.STARMAN);
+      this.appStateService.toggleCharacterTaken(ESetCharacterState.STARMAN_TAKEN);
+    }
   }
 
 }
@@ -302,11 +345,6 @@ export class AboutComponent implements AfterViewInit {
   &lt;div class&#x3D;&quot;row&quot;&gt;
     &lt;div class&#x3D;&quot;col-sm-12&quot;&gt;
       &lt;div class&#x3D;&quot;header-buffer&quot;&gt;&amp;nbsp;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class&#x3D;&quot;row&quot;&gt;
-    &lt;div class&#x3D;&quot;col-sm-4 offset-sm-4 text-center&quot;&gt;
-      &lt;h1&gt;About This App&lt;/h1&gt;
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;div class&#x3D;&quot;row&quot;&gt;
@@ -366,11 +404,11 @@ export class AboutComponent implements AfterViewInit {
 }
 
 .margin {
-  margin-top: 15px;
+  margin-top: 14px;
 }
 
 .margin-big {
-  margin-top: 37px;
+  margin-top: 20px;
 }
 </code></pre>
     </div>
@@ -400,8 +438,8 @@ export class AboutComponent implements AfterViewInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container">  <div class="row">    <div class="col-sm-12">      <div class="header-buffer">&nbsp;</div>    </div>  </div>  <div class="row">    <div class="col-sm-4 offset-sm-4 text-center">      <h1>About This App</h1>    </div>  </div>  <div class="row">    <div class="col-sm-12 text-center">      <div class="small-tv-container">        <img class="tv-overlay" src="../../assets/tv_overlay.png">        <video class="video" #video poster="../../assets/blank_video_bg.jpg" src="../../assets/about/telephone_tv_final.mp4"></video>      </div>    </div>  </div>  <div class="row margin-big">    <div class="col-sm-6 offset-sm-3 text-center">      <h2>Retro Talk Was Created By:</h2>    </div>  </div>  <div class="row margin">    <div class="col-sm-4">      <img src="../../assets/about/jessica.png">    </div>    <div class="col-sm-4">      <img src="../../assets/about/tim.png">    </div>    <div class="col-sm-4">      <img src="../../assets/about/michael.png">    </div>  </div>  <div class="row margin-big">    <div class="col-sm-4 offset-sm-4 text-center">      <h2>Core Technologies:</h2>    </div>  </div>  <div class="row margin">    <div class="col-sm-4 offset-sm-2 text-center">      <img src="../../assets/about/tv_one.png">    </div>    <div class="col-sm-4 text-center">      <img src="../../assets/about/tv_two.png">    </div>  </div>  <div class="row">    <div class="col-sm-12">      <div class="header-buffer">&nbsp;</div>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AccountComponent', 'selector': 'app-account'},{'name': 'AnswerCallModalComponent', 'selector': 'app-answer-call-modal'},{'name': 'ApiTestingComponent', 'selector': 'app-api-testing'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PreviewComponent', 'selector': 'app-preview'}];
+        var COMPONENT_TEMPLATE = '<div><div class="container">  <div class="row">    <div class="col-sm-12">      <div class="header-buffer">&nbsp;</div>    </div>  </div>  <div class="row">    <div class="col-sm-12 text-center">      <div class="small-tv-container">        <img class="tv-overlay" src="../../assets/tv_overlay.png">        <video class="video" #video poster="../../assets/blank_video_bg.jpg" src="../../assets/about/telephone_tv_final.mp4"></video>      </div>    </div>  </div>  <div class="row margin-big">    <div class="col-sm-6 offset-sm-3 text-center">      <h2>Retro Talk Was Created By:</h2>    </div>  </div>  <div class="row margin">    <div class="col-sm-4">      <img src="../../assets/about/jessica.png">    </div>    <div class="col-sm-4">      <img src="../../assets/about/tim.png">    </div>    <div class="col-sm-4">      <img src="../../assets/about/michael.png">    </div>  </div>  <div class="row margin-big">    <div class="col-sm-4 offset-sm-4 text-center">      <h2>Core Technologies:</h2>    </div>  </div>  <div class="row margin">    <div class="col-sm-4 offset-sm-2 text-center">      <img src="../../assets/about/tv_one.png">    </div>    <div class="col-sm-4 text-center">      <img src="../../assets/about/tv_two.png">    </div>  </div>  <div class="row">    <div class="col-sm-12">      <div class="header-buffer">&nbsp;</div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AnswerCallModalComponent', 'selector': 'app-answer-call-modal'},{'name': 'ApiTestingComponent', 'selector': 'app-api-testing'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PreviewComponent', 'selector': 'app-preview'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AboutComponent'};
 </script>
