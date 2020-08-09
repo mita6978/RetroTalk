@@ -1,8 +1,8 @@
 <div style="width:100%; text-align: center;" *ngIf="showMenu">
   <div class="retro-menu">
     <a routerLink="/home/chat"><img src="../../../assets/menu/chat.gif"></a>
-    <a href="/home/about"><img src="../../../assets/menu/about.gif"></a>
-    <img src="../../../assets/menu/docs.gif">
+    <img src="../../../assets/menu/about.gif" (click)="ghettoRig()">
+    <a href="https://retrotalk.herokuapp.com/documentation" target="_blank"><img src="../../../assets/menu/docs.gif"></a>
   </div>
 </div>
 <router-outlet></router-outlet>
