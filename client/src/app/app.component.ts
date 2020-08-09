@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.appStateService.initAppState();
     this.appStateService.state$.subscribe((state) => {
+      console.log(state);
     });
   }
 }
