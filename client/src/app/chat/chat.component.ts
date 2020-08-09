@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, HostListener, 
 
 import { connect, createLocalTracks } from 'twilio-video';
 
-import { IPhoneCall, IState, AppStateService } from '../shared/services/app-state.service';
+import { IPhoneCall, IState, AppStateService, ESetCharacterState } from '../shared/services/app-state.service';
 import { ECharacters } from '../shared/services/models/characters.enum';
 
 @Component({
@@ -86,6 +86,21 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    const character = sessionStorage.getItem('character');
+    if (character === ECharacters.ARTHUR) {
+      this.appStateService.setSelectedCharacter(ECharacters.ARTHUR);
+      this.appStateService.toggleCharacterTaken(ESetCharacterState.ARTHUR_TAKEN);
+      this.appStateService.toggleCharacterTaken(ESetCharacterState.ARTHUR_READY);
+
+    }
+
+    if (character === ECharacters.STARMAN) {
+      this.appStateService.setSelectedCharacter(ECharacters.STARMAN);
+      this.appStateService.toggleCharacterTaken(ESetCharacterState.STARMAN_TAKEN);
+      this.appStateService.toggleCharacterTaken(ESetCharacterState.STARMAN_READY);
+    }
+
+
     this.chatOrb.nativeElement.onload = () => {
       this.chatOrbLoaded = true;
     };
@@ -238,6 +253,15 @@ export class ChatComponent implements OnInit, AfterViewInit {
       phoneCallActive: false
     };
     this.appStateService.phoneCall(phoneCall);
+
+    setTimeout(() => {
+      const cancelCall: IPhoneCall = {
+        ...this.state.phoneCall,
+        arthurCallingStarman: false,
+        starmanCallingArthur: false,
+      };
+      this.appStateService.phoneCall(cancelCall);
+    }, 30000);
   }
 
   hangUp(): void {
@@ -298,8 +322,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   get disableCallButton(): boolean {
     return this.showCallingStarman === true || this.showCallingArthur === true ||
-    (this.showArthurOffline === false && this.showArthurOnline === false && this.showCallingArthur === false &&
-      this.showStarmanOffline === false && this.showStarmanOnline === false && this.showCallingStarman === false) === true;
+    this.showArthurOffline === true || this.showStarmanOffline === true || this.state.phoneCall.phoneCallActive === true;
   }
 
   get showLoader(): boolean {

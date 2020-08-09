@@ -44,6 +44,8 @@ export class PreviewComponent implements AfterViewInit {
       this.appStateService.toggleCharacterTaken(ESetCharacterState.STARMAN_READY);
     }
 
+    sessionStorage.setItem('character', this.appStateService.selectedCharacter);
+
     this.router.navigate(['/home']);
   }
 

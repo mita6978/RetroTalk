@@ -64,6 +64,34 @@ html {
 }
 
 
+
+
+.small-tv-container {
+  display: inline-block;
+  position:relative;
+  width: 474px;
+  height: 320px;
+
+  .tv-overlay {
+    width: 100%;
+    max-width: 100%;
+    z-index: -1;
+  }
+
+  .video {
+    position:absolute;
+    left: 50px;
+    top: 20px;
+    width: 320px;
+    height: 240px;
+    z-index: -3;
+    background-image: url('./assets/blank_video_bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+
 p {
   font-family: "Retro Nouveau";
   background-color: #c26611;

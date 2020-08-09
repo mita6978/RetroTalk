@@ -14,6 +14,10 @@ export class AnswerCallModalComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
+
+    setTimeout(() => {
+      this.activeModal.close(false);
+    }, 30000);
   }
 
 }

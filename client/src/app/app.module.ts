@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { AppStateService } from './shared/services/app-state.service';
 
