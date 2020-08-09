@@ -92,7 +92,7 @@ io.on('connection', (socket) => {
         
         console.log('phonecall', phoneCall);
 
-        if(phoneCall.phoneCallActive === true) {
+        if (phoneCall.phoneCallActive === true && state.phoneCall.phoneCallActive === false) {
             client.video.rooms
             .create({
                type: 'peer-to-peer',
@@ -125,19 +125,19 @@ io.on('connection', (socket) => {
                 state.phoneCall.starmanToken = token2.toJwt();
                 io.to('retrotalk').emit('appState', state);
             });
-        } else {
-            if(state.phoneCall.roomsid !== null) {
+        } else if (phoneCall.phoneCallActive === false && state.phoneCall.phoneCallActive === true) {
                 client.video.rooms(state.phoneCall.roomUniqueName)
                 .update({status: 'completed'})
                 .then(room => {
                     state = {...state, phoneCall: {...state.phoneCall, ...phoneCall, roomUniqueName: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}};
                     io.to('retrotalk').emit('appState', state);
                 });
-            } else {
-                state = {...state, phoneCall: {...state.phoneCall, ...phoneCall, roomUniqueName: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}};
-                io.to('retrotalk').emit('appState', state);
-            }
+        } else {
+            state = {...state, phoneCall: {...state.phoneCall, ...phoneCall, roomUniqueName: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}};
+            io.to('retrotalk').emit('appState', state);
         }
+
+
     });
 
     socket.on('resetState', (reset) => {
