@@ -82,6 +82,16 @@ export class ChatComponent implements OnInit, AfterViewInit {
       if (this.state.phoneCall.phoneCallActive === true) {
         this.participentAnswered();
       }
+
+      if (this.video && this.video.nativeElement &&
+        this.state.phoneCall.arthurToken === null &&
+        this.state.phoneCall.starmanToken === null &&
+        this.state.phoneCall.arthurCallingStarman === false &&
+        this.state.phoneCall.starmanCallingArthur === false &&
+        this.state.phoneCall.phoneCallActive === false) {
+          this.video.nativeElement.play();
+          this.hidePeerVideo = true;
+        }
     });
   }
 

@@ -135,6 +135,7 @@ io.on('connection', (socket) => {
         } else if (phoneCall.arthurCallingStarman === true || phoneCall.starmanCallingArthur === true) {
             state = {...state, phoneCall: {...state.phoneCall, ...phoneCall, roomUniqueName: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}};
             io.to('retrotalk').emit('appState', state);
+            
         } else if (phoneCall.arthurCallingStarman === false && phoneCall.starmanCallingArthur === false && phoneCall.phoneCallActive === false) {
             state = {...state, phoneCall: {...state.phoneCall, ...phoneCall, roomUniqueName: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}};
             io.to('retrotalk').emit('appState', state);
