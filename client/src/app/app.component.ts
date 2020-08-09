@@ -29,7 +29,13 @@ export class AppComponent implements OnInit {
     }
   }
 
-  constructor(private appStateService: AppStateService, private router: Router) {}
+  constructor(private appStateService: AppStateService, private router: Router) {
+    const refresh = sessionStorage.getItem('refresh');
+    if (refresh) {
+      this.router.navigate(['/home/about']);
+      sessionStorage.removeItem('refresh');
+    }
+  }
 
   ngOnInit(): void {
     this.appStateService.initAppState();

@@ -121,6 +121,11 @@ export class HomeComponent implements AfterViewInit {
     this.initMusic();
   }
 
+  ghettoRig(): void {
+    sessionStorage.setItem('refresh', 'Refresh');
+    window.location.href = '/';
+  }
+
   initMusic(): void {
     this.appStateService.state$.subscribe((state: IState) => {
 
