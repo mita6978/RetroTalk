@@ -89,6 +89,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('phoneCall', (phoneCall) => {
+        console.log('phonecall', phoneCall)
 
         if(phoneCall.phoneCallActive === true) {
             client.video.rooms
