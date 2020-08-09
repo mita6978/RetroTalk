@@ -15,7 +15,9 @@ export class AppComponent implements OnInit {
     if (event.shiftKey === true && event.code === 'Enter') {
       this.appStateService.resetAppState();
       this.router.navigate(['/']);
-      location.reload();
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
     }
   }
 
