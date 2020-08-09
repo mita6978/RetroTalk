@@ -27,7 +27,7 @@
       <button type="button" class="btn btn-success btn-lg" (click)="startCall()" [disabled]="disableCallButton">START CALL <i class="fa fa-phone"></i></button>
     </div>
     <div class="col-sm-4 offset-sm-2 text-center">
-      <button type="button" class="btn btn-danger btn-lg" (click)="hangUp()" [disabled]="!disableCallButton">END CALL <i class="fa fa-times"></i></button>
+      <button type="button" class="btn btn-danger btn-lg" (click)="hangUp()" [disabled]="state.phoneCall.phoneCallActive === false">END CALL <i class="fa fa-times"></i></button>
     </div>
   </div>
   <div class="row">

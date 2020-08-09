@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { AppStateService, ESetCharacterState } from './shared/services/app-state.service';
 import { ECharacters } from './shared/services/models/characters.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ export class AppComponent implements OnInit {
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.shiftKey === true && event.code === 'Enter') {
       this.appStateService.resetAppState();
+      this.router.navigate(['/']);
     }
   }
 
@@ -27,12 +29,11 @@ export class AppComponent implements OnInit {
     }
   }
 
-  constructor(private appStateService: AppStateService) {}
+  constructor(private appStateService: AppStateService, private router: Router) {}
 
   ngOnInit(): void {
     this.appStateService.initAppState();
     this.appStateService.state$.subscribe((state) => {
-      console.log(state);
     });
   }
 }

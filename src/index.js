@@ -63,6 +63,10 @@ io.on('connection', (socket) => {
             state.isArthurReady = true;
         }
 
+        if(characterState === 'ARTHUR_NOT_READY') {
+            state.isArthurReady = false;
+        }
+
         if(characterState === 'STARMAN_TAKEN') {
             state.isStarmantaken = true;
         }
@@ -75,6 +79,11 @@ io.on('connection', (socket) => {
         if(characterState === 'STARMAN_READY') {
             state.isStarmanReady = true;
         }
+
+        if(characterState === 'STARMAN_NOT_READY') {
+            state.isStarmanReady = false;
+        }
+
 
         io.to('retrotalk').emit('appState', state);
     });
@@ -116,19 +125,17 @@ io.on('connection', (socket) => {
             });
         } else {
             if(state.phoneCall.roomsid !== null) {
-                client.video.rooms('retrotalk')
+                client.video.rooms(state.phoneCall.roomUniqueName)
                 .update({status: 'completed'})
                 .then(room => {
-                    console.log(ran)
+                    state = {...state, phoneCall: {...state.phoneCall, ...phoneCall, roomUniqueName: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}};
+                    io.to('retrotalk').emit('appState', state);
                 });
-                state = {...state, phoneCall: {...state.phoneCall, ...phoneCall, roomUniqueName: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}};
-                io.to('retrotalk').emit('appState', state);
             } else {
                 state = {...state, phoneCall: {...state.phoneCall, ...phoneCall, roomUniqueName: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}};
                 io.to('retrotalk').emit('appState', state);
             }
         }
-        console.log(phoneCall);
     });
 
     socket.on('resetState', (reset) => {
@@ -155,10 +162,7 @@ io.on('connection', (socket) => {
         }
     });
 
-
-
     io.to('retrotalk').emit('appState', state);
-
 });
 
 
