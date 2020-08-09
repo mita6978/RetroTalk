@@ -179,6 +179,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
             participant.on('trackSubscribed', track => {
 
+              const oldChildElements = Array.from(this.participentVideo.nativeElement.children);
+              for (const child of oldChildElements) {
+                this.renderer.removeChild(this.participentVideo.nativeElement, child);
+              }
+
               this.oldPeerTrack = track.attach();
               this.video.nativeElement.pause();
               this.hidePeerVideo = false;
@@ -197,6 +202,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
           room.once('participantConnected', participant => {
             participant.tracks.forEach(publication => {
+
+              const oldChildElements = Array.from(this.participentVideo.nativeElement.children);
+              for (const child of oldChildElements) {
+                this.renderer.removeChild(this.participentVideo.nativeElement, child);
+              }
 
               if (publication.isSubscribed) {
                 const track = publication.track;
@@ -217,6 +227,12 @@ export class ChatComponent implements OnInit, AfterViewInit {
             });
 
             participant.on('trackSubscribed', track => {
+
+              const oldChildElements = Array.from(this.participentVideo.nativeElement.children);
+              for (const child of oldChildElements) {
+                this.renderer.removeChild(this.participentVideo.nativeElement, child);
+              }
+
               this.oldPeerTrack = track.attach();
               this.video.nativeElement.pause();
               this.hidePeerVideo = false;
