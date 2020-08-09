@@ -25,8 +25,10 @@ export class ChatComponent implements OnInit, AfterViewInit {
   starmanCallingImgLoaded = false;
   callingArthurImgLoaded = false;
   callingStarmanLoaded = false;
+  timer: any;
 
   hidePeerVideo = true;
+  hideCallingVideo = true;
 
   state: IState = {
     isArthurTaken: false,
@@ -47,6 +49,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     oldPeerTrack: any;
 
   @ViewChild('video') private video: ElementRef;
+  @ViewChild('callingVideo') private callingVideo: ElementRef;
   @ViewChild('participentVideo') private participentVideo: ElementRef;
 
   @ViewChild('chatOrb') private chatOrb: ElementRef;
@@ -91,6 +94,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.state.phoneCall.phoneCallActive === false) {
           this.video.nativeElement.play();
           this.hidePeerVideo = true;
+          this.hideCallingVideo = true;
+          this.callingVideo.nativeElement.pause();
+          this.callingVideo.nativeElement.currentTime = 0;
         }
     });
   }
@@ -197,6 +203,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
               this.oldPeerTrack = track.attach();
               this.video.nativeElement.pause();
               this.hidePeerVideo = false;
+              this.hideCallingVideo = true;
+              this.callingVideo.nativeElement.pause();
+              this.callingVideo.nativeElement.currentTime = 0;
 
               this.renderer.appendChild(this.participentVideo.nativeElement, track.attach());
               // this.participentVideo.nativeElement.style.width = '50%';
@@ -224,6 +233,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
                 this.oldPeerTrack = track.attach();
                 this.video.nativeElement.pause();
                 this.hidePeerVideo = false;
+                this.hideCallingVideo = true;
+                this.callingVideo.nativeElement.pause();
+                this.callingVideo.nativeElement.currentTime = 0;
 
                 this.renderer.appendChild(this.participentVideo.nativeElement, track.attach());
                 // this.participentVideo.nativeElement.style.width = '50%';
@@ -246,6 +258,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
               this.oldPeerTrack = track.attach();
               this.video.nativeElement.pause();
               this.hidePeerVideo = false;
+              this.hideCallingVideo = true;
+              this.callingVideo.nativeElement.pause();
+              this.callingVideo.nativeElement.currentTime = 0;
               this.renderer.appendChild(this.participentVideo.nativeElement, track.attach());
               // this.participentVideo.nativeElement.style.width = '50%';
               const childElements = Array.from(this.participentVideo.nativeElement.children);
@@ -271,6 +286,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   startCall(): void {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = undefined;
+    }
+
     const phoneCall: IPhoneCall = {
       ...this.state.phoneCall,
       arthurCallingStarman: this.appStateService.selectedCharacter === ECharacters.ARTHUR,
@@ -278,14 +298,20 @@ export class ChatComponent implements OnInit, AfterViewInit {
       phoneCallActive: false
     };
     this.appStateService.phoneCall(phoneCall);
+    this.hideCallingVideo = false;
+    this.hidePeerVideo = true;
+    this.callingVideo.nativeElement.currentTime = 0;
+    this.video.nativeElement.pause();
+    this.callingVideo.nativeElement.play();
 
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       const cancelCall: IPhoneCall = {
         ...this.state.phoneCall,
         arthurCallingStarman: false,
         starmanCallingArthur: false,
       };
       this.appStateService.phoneCall(cancelCall);
+      this.hideCallingVideo = true;
     }, 30000);
   }
 
@@ -313,6 +339,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
     this.appStateService.phoneCall(phoneCall);
     this.video.nativeElement.play();
     this.hidePeerVideo = true;
+    this.hideCallingVideo = true;
+    this.callingVideo.nativeElement.pause();
+    this.callingVideo.nativeElement.currentTime = 0;
   }
 
   get showArthurOffline(): boolean {

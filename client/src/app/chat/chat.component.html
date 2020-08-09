@@ -18,7 +18,8 @@
         <img class="user-status" src="../../assets/chat/starman_online.png" *ngIf="showStarmanOnline">
         <img class="user-status" src="../../assets/chat/starman_calling.png" *ngIf="showCallingStarman">
         <div #participentVideo class="video" [hidden]="hidePeerVideo"></div>
-        <video class="video" #video poster="../../assets/blank_video_bg.jpg" src="../../assets/chat/waiting_video_final.mp4" loop [hidden]="!hidePeerVideo"></video>
+        <video class="video" src="../../assets/chat/phone_call_final.mp4" [hidden]="hideCallingVideo" preload="auto" #callingVideo></video>
+        <video class="video" #video poster="../../assets/blank_video_bg.jpg" src="../../assets/chat/waiting_video_final.mp4" loop [hidden]="!hidePeerVideo || hideCallingVideo === false"></video>
       </div>
     </div>
   </div>
