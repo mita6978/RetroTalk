@@ -52,24 +52,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </a>
                         <ul class="links collapse " ${ isNormalMode ? 'id="modules-links"' : 'id="xs-modules-links"' }>
                             <li class="link">
-                                <a href="modules/ApiTestingModule.html" data-type="entity-link">ApiTestingModule</a>
-                                    <li class="chapter inner">
-                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-ApiTestingModule-79fb35fa912bacd0dc004eada5b93e1a"' : 'data-target="#xs-components-links-module-ApiTestingModule-79fb35fa912bacd0dc004eada5b93e1a"' }>
-                                            <span class="icon ion-md-cog"></span>
-                                            <span>Components</span>
-                                            <span class="icon ion-ios-arrow-down"></span>
-                                        </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-ApiTestingModule-79fb35fa912bacd0dc004eada5b93e1a"' :
-                                            'id="xs-components-links-module-ApiTestingModule-79fb35fa912bacd0dc004eada5b93e1a"' }>
-                                            <li class="link">
-                                                <a href="components/ApiTestingComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">ApiTestingComponent</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                            </li>
-                            <li class="link">
                                 <a href="modules/AppModule.html" data-type="entity-link">AppModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
@@ -194,9 +176,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <span class="icon ion-ios-arrow-down"></span>
                             </div>
                             <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
-                                <li class="link">
-                                    <a href="injectables/ApiTestingService.html" data-type="entity-link">ApiTestingService</a>
-                                </li>
                                 <li class="link">
                                     <a href="injectables/AppStateService.html" data-type="entity-link">AppStateService</a>
                                 </li>
