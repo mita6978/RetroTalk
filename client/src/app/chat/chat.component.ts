@@ -91,7 +91,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
       this.appStateService.setSelectedCharacter(ECharacters.ARTHUR);
       this.appStateService.toggleCharacterTaken(ESetCharacterState.ARTHUR_TAKEN);
       this.appStateService.toggleCharacterTaken(ESetCharacterState.ARTHUR_READY);
-
     }
 
     if (character === ECharacters.STARMAN) {
