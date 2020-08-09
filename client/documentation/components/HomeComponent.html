@@ -243,6 +243,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#ghettoRig">ghettoRig</a>
+                            </li>
+                            <li>
                                 <a href="#initMusic">initMusic</a>
                             </li>
                             <li>
@@ -351,6 +354,45 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="ghettoRig"></a>
+                    <span class="name">
+                        <b>
+                            ghettoRig
+                        </b>
+                        <a href="#ghettoRig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ghettoRig()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="124"
+                            class="link-to-prism">src/app/home/home/home.component.ts:124</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="initMusic"></a>
                     <span class="name">
                         <b>
@@ -369,8 +411,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="124"
-                            class="link-to-prism">src/app/home/home/home.component.ts:124</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="129"
+                            class="link-to-prism">src/app/home/home/home.component.ts:129</a></div>
                 </td>
             </tr>
 
@@ -447,8 +489,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="141"
-                            class="link-to-prism">src/app/home/home/home.component.ts:141</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="146"
+                            class="link-to-prism">src/app/home/home/home.component.ts:146</a></div>
                 </td>
             </tr>
 
@@ -1450,7 +1492,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="167" class="link-to-prism">src/app/home/home/home.component.ts:167</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="172" class="link-to-prism">src/app/home/home/home.component.ts:172</a></div>
                                 </td>
                             </tr>
 
@@ -1584,6 +1626,11 @@ export class HomeComponent implements AfterViewInit {
     this.initMusic();
   }
 
+  ghettoRig(): void {
+    sessionStorage.setItem(&#x27;refresh&#x27;, &#x27;Refresh&#x27;);
+    window.location.href &#x3D; &#x27;/&#x27;;
+  }
+
   initMusic(): void {
     this.appStateService.state$.subscribe((state: IState) &#x3D;&gt; {
 
@@ -1653,8 +1700,8 @@ export class HomeComponent implements AfterViewInit {
         <pre class="line-numbers"><code class="language-html">&lt;div style&#x3D;&quot;width:100%; text-align: center;&quot; *ngIf&#x3D;&quot;showMenu&quot;&gt;
   &lt;div class&#x3D;&quot;retro-menu&quot;&gt;
     &lt;a routerLink&#x3D;&quot;/home/chat&quot;&gt;&lt;img src&#x3D;&quot;../../../assets/menu/chat.gif&quot;&gt;&lt;/a&gt;
-    &lt;a href&#x3D;&quot;/home/about&quot;&gt;&lt;img src&#x3D;&quot;../../../assets/menu/about.gif&quot;&gt;&lt;/a&gt;
-    &lt;img src&#x3D;&quot;../../../assets/menu/docs.gif&quot;&gt;
+    &lt;img src&#x3D;&quot;../../../assets/menu/about.gif&quot; (click)&#x3D;&quot;ghettoRig()&quot;&gt;
+    &lt;a href&#x3D;&quot;https://retrotalk.herokuapp.com/documentation&quot; target&#x3D;&quot;_blank&quot;&gt;&lt;img src&#x3D;&quot;../../../assets/menu/docs.gif&quot;&gt;&lt;/a&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;router-outlet&gt;&lt;/router-outlet&gt;
@@ -1737,8 +1784,8 @@ export class HomeComponent implements AfterViewInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div style="width:100%; text-align: center;" *ngIf="showMenu">  <div class="retro-menu">    <a routerLink="/home/chat"><img src="../../../assets/menu/chat.gif"></a>    <a href="/home/about"><img src="../../../assets/menu/about.gif"></a>    <img src="../../../assets/menu/docs.gif">  </div></div><router-outlet></router-outlet><!-- Preload all of the below --><img src="../../../assets/blank_video_bg.jpg" hidden #blankVideoBG><video src="../../../assets/chat/phone_call_final.mp4" hidden preload="auto" #phoneCallVid></video><audio src="../../../assets/chat/phone_ring.mp3" hidden preload="auto" #phoneRingMP3></audio><img class="user-status" src="../../../assets/chat/arthur_offline.png" hidden #arthurOfflineImg><img class="user-status" src="../../../assets/chat/arthur_online.png" hidden #arthurOnlineImg><img class="user-status" src="../../../assets/chat/arthur_calling.png" hidden #arthurCallingImg><img class="user-status" src="../../../assets/chat/starman_online.png" hidden #starmanOnlineImg><img class="user-status" src="../../../assets/chat/starman_offline.png" hidden #starmanOfflineImg><img class="user-status" src="../../../assets/chat/starman_calling.png" hidden #starmanCallingImg><img src="../../../assets/chat/calling_arthur.png" hidden #callingArthurImg><img src="../../../assets/chat/calling_starman.png" hidden #callingStarmanImg><img src="../../../assets/menu/chat.gif" hidden #chatOrb><img src="../../../assets/menu/about.gif" hidden #aboutOrb><img src="../../../assets/menu/docs.gif" hidden #codeOrb></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AccountComponent', 'selector': 'app-account'},{'name': 'AnswerCallModalComponent', 'selector': 'app-answer-call-modal'},{'name': 'ApiTestingComponent', 'selector': 'app-api-testing'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PreviewComponent', 'selector': 'app-preview'}];
+        var COMPONENT_TEMPLATE = '<div><div style="width:100%; text-align: center;" *ngIf="showMenu">  <div class="retro-menu">    <a routerLink="/home/chat"><img src="../../../assets/menu/chat.gif"></a>    <img src="../../../assets/menu/about.gif" (click)="ghettoRig()">    <a href="https://retrotalk.herokuapp.com/documentation" target="_blank"><img src="../../../assets/menu/docs.gif"></a>  </div></div><router-outlet></router-outlet><!-- Preload all of the below --><img src="../../../assets/blank_video_bg.jpg" hidden #blankVideoBG><video src="../../../assets/chat/phone_call_final.mp4" hidden preload="auto" #phoneCallVid></video><audio src="../../../assets/chat/phone_ring.mp3" hidden preload="auto" #phoneRingMP3></audio><img class="user-status" src="../../../assets/chat/arthur_offline.png" hidden #arthurOfflineImg><img class="user-status" src="../../../assets/chat/arthur_online.png" hidden #arthurOnlineImg><img class="user-status" src="../../../assets/chat/arthur_calling.png" hidden #arthurCallingImg><img class="user-status" src="../../../assets/chat/starman_online.png" hidden #starmanOnlineImg><img class="user-status" src="../../../assets/chat/starman_offline.png" hidden #starmanOfflineImg><img class="user-status" src="../../../assets/chat/starman_calling.png" hidden #starmanCallingImg><img src="../../../assets/chat/calling_arthur.png" hidden #callingArthurImg><img src="../../../assets/chat/calling_starman.png" hidden #callingStarmanImg><img src="../../../assets/menu/chat.gif" hidden #chatOrb><img src="../../../assets/menu/about.gif" hidden #aboutOrb><img src="../../../assets/menu/docs.gif" hidden #codeOrb></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AnswerCallModalComponent', 'selector': 'app-answer-call-modal'},{'name': 'ApiTestingComponent', 'selector': 'app-api-testing'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PreviewComponent', 'selector': 'app-preview'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HomeComponent'};
 </script>

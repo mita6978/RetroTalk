@@ -173,7 +173,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/app.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/app.component.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -289,8 +289,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/app/app.component.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/app/app.component.ts:25</a></div>
                 </td>
             </tr>
 
@@ -325,8 +325,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="34"
-                            class="link-to-prism">src/app/app.component.ts:34</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/app/app.component.ts:43</a></div>
                 </td>
             </tr>
 
@@ -365,6 +365,9 @@ export class AppComponent implements OnInit {
     if (event.shiftKey &#x3D;&#x3D;&#x3D; true &amp;&amp; event.code &#x3D;&#x3D;&#x3D; &#x27;Enter&#x27;) {
       this.appStateService.resetAppState();
       this.router.navigate([&#x27;/&#x27;]);
+      setTimeout(() &#x3D;&gt; {
+        location.reload();
+      }, 1000);
     }
   }
 
@@ -379,11 +382,18 @@ export class AppComponent implements OnInit {
     }
   }
 
-  constructor(private appStateService: AppStateService, private router: Router) {}
+  constructor(private appStateService: AppStateService, private router: Router) {
+    const refresh &#x3D; sessionStorage.getItem(&#x27;refresh&#x27;);
+    if (refresh) {
+      this.router.navigate([&#x27;/home/about&#x27;]);
+      sessionStorage.removeItem(&#x27;refresh&#x27;);
+    }
+  }
 
   ngOnInit(): void {
     this.appStateService.initAppState();
     this.appStateService.state$.subscribe((state) &#x3D;&gt; {
+      console.log(state);
     });
   }
 }
@@ -430,7 +440,7 @@ export class AppComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><router-outlet></router-outlet><img src="../assets/loader1.gif" hidden><img src="../../../assets/tv_overlay.png" hidden></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AccountComponent', 'selector': 'app-account'},{'name': 'AnswerCallModalComponent', 'selector': 'app-answer-call-modal'},{'name': 'ApiTestingComponent', 'selector': 'app-api-testing'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PreviewComponent', 'selector': 'app-preview'}];
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AnswerCallModalComponent', 'selector': 'app-answer-call-modal'},{'name': 'ApiTestingComponent', 'selector': 'app-api-testing'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PreviewComponent', 'selector': 'app-preview'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>
