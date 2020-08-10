@@ -1,10 +1,10 @@
-# RetroTelephoneTV
+# Retro Talk - A groovy way to speak face-to-face
 
 ### Team Members:
 Jessica Knoblock, Michael Taylor, Timothy Papich
 
 ### Vision Statement
-We will be producing a retro-themed online video conferencing app. It will be free to use, requiring only your Facebook account to sign up. You'll be able to easily video chat with friends and connect with family in a trendy, old-school interface.
+We will be producing a retro-themed online video conferencing app. It will be free to use. You'll be able to easily video chat with friends and connect with family in a trendy, old-school interface.
 
 ### Motivation
 The primary motivations for this project are to gain valuable experience using technologies that are in high demand and boost our portfolios by creating a functioning app that has real-world utility. Some skills we hope to improve upon specifically are the software development process, Angular web framework, and UX design.
