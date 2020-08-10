@@ -7,7 +7,7 @@ Jessica Knoblock, Michael Taylor, Timothy Papich
 https://app.clubhouse.io/retrotelephonetv
 
 ### Project Demo:
-![Retro Talk - A groovy way to speak face-to-face](RetroTalk_Screenshot.png)
+![Retro Talk - A groovy way to speak face-to-face](https://github.com/mita6978/RetroTalk/blob/master/RetroTalk_Screenshot.png)
 You can watch a video demo here: https://youtu.be/uOJ1p_j4d8A
 
 ### Version Control Repository Link:
